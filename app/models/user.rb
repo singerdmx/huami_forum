@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :email, use: [:slugged, :finders]
 
+  validates_length_of :name, minimum: 1, maximum: 50, message: 'The length of name should be between 1 and 50'
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
