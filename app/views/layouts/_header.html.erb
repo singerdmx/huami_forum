@@ -15,10 +15,17 @@
                   <span class="caret"></span></a>
                 <ul class="dropdown-menu" style="padding-right: 18px">
                   <li>
-                    <a href="/users/edit">
+                    <a href="/profiles">
                       <i class="pull-left glyphicon glyphicon glyphicon-user dropdown-menu-icon"></i>
+                      Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/users/edit">
+                      <i class="pull-left glyphicon glyphicon glyphicon-cog dropdown-menu-icon"></i>
                       <%= current_user.email %>
                     </a>
+                  </li>
                   <li>
                     <a href="/conversations">
                       <i class="pull-left glyphicon glyphicon glyphicon-envelope dropdown-menu-icon"></i>

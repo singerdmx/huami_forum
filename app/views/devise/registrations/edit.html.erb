@@ -23,6 +23,10 @@
     <button type="submit" class="btn btn-lg btn-primary btn-block">Update</button>
 <% end %>
 
+<h3>Edit my profile</h3>
+
+<p>Need to update? <%= link_to "Update my profile", '/profiles', method: :get %></p>
+
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
