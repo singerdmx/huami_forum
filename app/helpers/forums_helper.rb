@@ -34,7 +34,7 @@ module ForumsHelper
                                  forum_name: forum_name, description: description)
     Rails.logger.info "created_forum #{created_forum.inspect}"
 
-    moderator_groups.each do |group_id|
+    (moderator_groups || []).each do |group_id|
       created_moderator_group = ModeratorGroup.create(group: group_id, forum: created_forum.attributes['id'])
       Rails.logger.info "created_moderator_group #{created_moderator_group.inspect}"
     end
