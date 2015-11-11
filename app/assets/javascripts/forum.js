@@ -470,7 +470,7 @@
                 });
                 $log.info('favoriteTopics', $scope.favoriteTopics.length);
                 $log.info('POST /favorites: topic = ' + id);
-                ForumService.addUserFavorite({type: 'topic', topic: id, forum: id});
+                ForumService.addUserFavorite({type: 'topic', topic: id, forum: forum});
             }
 
             if (target.hasClass('glyphicon-star')) {
