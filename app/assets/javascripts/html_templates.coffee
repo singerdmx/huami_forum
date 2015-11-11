@@ -58,7 +58,7 @@ window.htmlTemplates.postBody = '''
         <a class="item" ng-click="deletePost('<%= data.topic %>', '<%= data.id %>')">Delete</a>
       <% } %>
       <a class="item">Like</a>
-      <a title="Reply, quoting this message" class="item">Reply</a>
+      <a title="Reply, quoting this message" class="item" ng-click="replyToPost('<%= data.topic %>', '<%= data.id %>')">Reply</a>
     </div>
   </div>
 '''

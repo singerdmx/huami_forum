@@ -540,6 +540,11 @@
             ForumService.deletePost(topic, id);
             $scope.refreshPostsTable();
         };
+        $scope.replyToPost = function (topic, id) {
+            if ($scope.userId == -1) {
+                location.href = '/users/sign_in';
+            }
+        }
         $scope.refreshCategoriesTable = function () {
             ForumService.getCategoriesWithFavorites().then(renderCategoriesTable, onError);
         };
