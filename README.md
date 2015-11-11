@@ -1,4 +1,6 @@
-`gem install rails --version=4.0.13`
+Rails version 4.1.13:
+
+`gem install rails --version=4.1.13`
 
 DynamoDB schema:
 
