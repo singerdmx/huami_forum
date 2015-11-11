@@ -2,6 +2,8 @@ Rails version 4.1.13:
 
 `gem install rails --version=4.1.13`
 
+
+
 DynamoDB schema:
 
 category: id(hash)
@@ -39,3 +41,7 @@ subscription: topic(hash, topic_id), user_id(range)
 favorite_forums: user_id(hash), id(range, string), category(string), forum (string)
 
 favorite_topics: user_id(hash), id(range, string), forum (string), topic (string)
+
+user_topics (topics created by user): user_id(hash), updated_at(range, int), forum (string), topic (string)
+
+user_posts (posts created by user): user_id(hash), updated_at(range, int), topic (string), post (string)
