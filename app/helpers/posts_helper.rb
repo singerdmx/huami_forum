@@ -7,11 +7,11 @@ module PostsHelper
 
   def simple_post_hash(post_hash)
     h = {}
-    %w(id body_text topic forum category).each do |k|
+    %w(id body_text topic forum category reply_to_post).each do |k|
       h[k] = post_hash[k]
     end
 
-    %w(updated_at user_id created_at reply_to_post).each do |k|
+    %w(updated_at user_id created_at).each do |k|
       h[k] = post_hash[k].to_i if post_hash[k]
     end
 

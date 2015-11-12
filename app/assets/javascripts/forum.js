@@ -401,15 +401,21 @@
                     }
                 },
             ]
+
+            var postsMap = _.object(_.map(data, function (item) {
+                return [item.id, item];
+            }));
             var aaData = _.map(data, function (p) {
                 p.updated_at_time = $filter('date')(p.updated_at * 1000, 'MMM d, y h:mm a');
                 if ($scope.userId == p.user.id) {
                     p.edit = true;
                 }
+                p.reply_to_post = postsMap[p.reply_to_post];
+                $log.info('p', p);
                 return [p.updated_at, p.user, p];
             });
 
-            $log.info(aaData);
+            $log.info('renderPostsTable aaData', aaData);
             var tableDefinition = {
                 bDestroy: true,
                 aaData: aaData,
