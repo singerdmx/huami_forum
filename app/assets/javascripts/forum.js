@@ -193,7 +193,7 @@
     // Please note that $modalInstance represents a modal window (instance) dependency.
     // It is not the same as the $uibModal service used below.
     var modalInstanceController = function ($scope, $log, $modalInstance,
-                                            ForumService, forum, title, topicId, postId, subject, text) {
+                                            ForumService, forum, title, topicId, postId, subject, text, replyToPostId) {
         $scope.modalTitle = title;
         $scope.modalTopicId = topicId;
         $scope.modalPostId = postId;
@@ -218,7 +218,7 @@
                     ForumService.editTopic(forum.id, topicId, subject);
                     break;
                 case 'New Post':
-                    ForumService.newPost(forum.category, forum.id, topicId, text);
+                    ForumService.newPost(forum.category, forum.id, topicId, text, replyToPostId);
                     break;
                 case 'Edit Post':
                     ForumService.editPost(topicId, postId, text);
@@ -236,7 +236,7 @@
 
     forum.controller('ModalInstanceController',
         ['$scope', '$log', '$modalInstance', 'ForumService',
-            'forum', 'title', 'topicId', 'postId', 'subject', 'text', modalInstanceController]);
+            'forum', 'title', 'topicId', 'postId', 'subject', 'text', 'replyToPostId', modalInstanceController]);
 
     var forumController = function ($scope, $log, $compile, $uibModal, $filter, ForumService) {
         $scope.oneAtATime = true;
@@ -551,11 +551,14 @@
             ForumService.deletePost(topic, id);
             $scope.refreshPostsTable();
         };
-        $scope.replyToPost = function (topic, id) {
+        $scope.replyToPost = function (topic, id, $event) {
+            $log.info('replyToPost: topic ' + topic + ', id ' + id);
             if ($scope.userId == -1) {
                 location.href = '/users/sign_in';
             }
-        }
+            $scope.replyToPostId = id;
+            $scope.openModal('New Post', topic, id, $scope.selectedTopic.subject, $event);
+        };
         $scope.refreshCategoriesTable = function () {
             ForumService.getCategoriesWithFavorites().then(renderCategoriesTable, onError);
         };
@@ -610,6 +613,9 @@
                         }
                         return text;
                     },
+                    replyToPostId: function () {
+                        return $scope.replyToPostId;
+                    },
                 }
             });
 
@@ -624,6 +630,7 @@
             });
 
             modalInstance.result.then(function () {
+                $scope.replyToPostId = null;
                 $log.info('Modal ok');
                 switch (modalTitle) {
                     case 'New Topic':
@@ -638,6 +645,7 @@
                         $log.error('Invalid modalTitle: ' + modalTitle);
                 }
             }, function () {
+                $scope.replyToPostId = null;
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };

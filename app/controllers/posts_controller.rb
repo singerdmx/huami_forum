@@ -36,10 +36,11 @@ class PostsController < ApplicationController
 
   def create
     Post.create(category: params['category'],
-                forum: params['forum_id'],
+                forum: params['forum'],
                 topic: params['topic_id'],
                 body_text: params['text'],
-                user_id: current_user.id)
+                user_id: current_user.id,
+                reply_to_post: params['reply_to_post'])
     render json: {success: true}
   rescue Exception => e
     Rails.logger.error "Encountered an error: #{e.inspect}\nbacktrace: #{e.backtrace}"
