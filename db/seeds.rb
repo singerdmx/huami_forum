@@ -4,10 +4,11 @@ require 'securerandom'
 #           User              #
 ###############################
 User.delete_all
+Profile.delete_all
 
 user_size = 5
 users = user_size.times.map do |i|
-  User.create(
+  User.create!(
       email: "user#{i}@test.com",
       password: 'user1234',
       password_confirmation: 'user1234',
@@ -17,7 +18,7 @@ users = user_size.times.map do |i|
       forem_admin: i == 0)
 end
 
-users << User.create(
+users << User.create!(
     email: 'singerdmx@gmail.com',
     password: '12345678',
     password_confirmation: '12345678',
@@ -25,6 +26,10 @@ users << User.create(
     confirmed_at: Time.now,
     confirmation_sent_at: Time.now - 30,
     forem_admin: true)
+
+users.each do |u|
+  Profile.create!(user_id: u.id)
+end
 
 user = User.first
 
@@ -70,10 +75,10 @@ client.create_table(
 )
 
 categories = []
-categories << Category.create(category_name: 'Announcements')
-categories << Category.create(category_name: 'General Support')
-categories << Category.create(category_name: 'Accessories')
-categories << Category.create(category_name: 'Development')
+categories << Category.create!(category_name: 'Announcements')
+categories << Category.create!(category_name: 'General Support')
+categories << Category.create!(category_name: 'Accessories')
+categories << Category.create!(category_name: 'Development')
 
 ###############################
 #           Forum             #
@@ -131,42 +136,42 @@ client.create_table(
 )
 
 forums = []
-forums << Forum.create(category: categories.first.id,
+forums << Forum.create!(category: categories.first.id,
                        category_name: categories.first.category_name,
                        forum_name: "Announcements Forum",
                        description: "Mi Band updates")
 
-forums << Forum.create(category: categories.first.id,
+forums << Forum.create!(category: categories.first.id,
                        category_name: categories.first.category_name,
                        forum_name: "App Forum",
                        description: "App discussion")
 
-forums << Forum.create(category: categories[1].id,
+forums << Forum.create!(category: categories[1].id,
                        category_name: categories[1].category_name,
                        forum_name: "Beginner Forum",
                        description: "Beginner tutorial")
 
-forums << Forum.create(category: categories[2].id,
+forums << Forum.create!(category: categories[2].id,
                        category_name: categories[2].category_name,
                        forum_name: "Battery",
                        description: "Battery discussion")
 
-forums << Forum.create(category: categories[2].id,
+forums << Forum.create!(category: categories[2].id,
                        category_name: categories[2].category_name,
                        forum_name: "Bands",
                        description: "Band styles")
 
-forums << Forum.create(category: categories[3].id,
+forums << Forum.create!(category: categories[3].id,
                        category_name: categories[3].category_name,
                        forum_name: "Contribute to App",
                        description: "How to contribute your code")
 
 if ENV['massive_seeding']
   (0..2).each do |i|
-    c = Category.create(category_name: 'Category - ' + i.to_s)
+    c = Category.create!(category_name: 'Category - ' + i.to_s)
     categories << c
     (0..3).each do |j|
-      forums << Forum.create(category: c.id,
+      forums << Forum.create!(category: c.id,
                              category_name: c.category_name,
                              forum_name: "Forum - #{i}#{j}",
                              description: "f#{i}#{j}")
@@ -229,7 +234,7 @@ client.create_table(
 )
 
 topics = []
-topics << Topic.create(
+topics << Topic.create!(
     forum: forums.first.id,
     category: forums.first.category,
     last_post_at: Time.now.to_i - 10,
@@ -238,7 +243,7 @@ topics << Topic.create(
     user_id: user.id,
     state: 'approved')
 
-topics << Topic.create(
+topics << Topic.create!(
     forum: forums.first.id,
     category: forums.first.category,
     last_post_at: Time.now.to_i,
@@ -250,7 +255,7 @@ topics << Topic.create(
 if ENV['massive_seeding']
   forums.each do |f|
     (0..90).each do |i|
-      topics << Topic.create(
+      topics << Topic.create!(
           forum: f.id,
           category: f.category,
           last_post_at: Time.now.to_i - i * 10,
@@ -317,7 +322,7 @@ client.create_table(
 )
 
 posts = []
-posts << Post.create(
+posts << Post.create!(
     category: topics.first.category,
     forum: topics.first.forum,
     topic: topics.first.id,
@@ -328,7 +333,7 @@ posts << Post.create(
 if ENV['massive_seeding']
   1000.times do
     topic = topics[SecureRandom.random_number(20)]
-    posts << Post.create(
+    posts << Post.create!(
         category: topic.category,
         forum: topic.forum,
         topic: topic.id,
@@ -338,7 +343,7 @@ if ENV['massive_seeding']
   end
 end
 
-posts << Post.create(
+posts << Post.create!(
     category: topics.first.category,
     forum: topics.first.forum,
     topic: topics.first.id,
@@ -379,7 +384,7 @@ client.create_table(
 )
 
 views = []
-views << View.create(
+views << View.create!(
     user_id: user.id,
     id: "#{Topic.get_table_name}##{topics.first.id}",
     viewable_id: topics.first.id,
@@ -410,9 +415,9 @@ client.create_table(
 )
 
 groups = []
-groups << Group.create(name: 'Moderator')
-groups << Group.create(name: 'Normal User')
-groups << Group.create(name: 'Admin')
+groups << Group.create!(name: 'Moderator')
+groups << Group.create!(name: 'Normal User')
+groups << Group.create!(name: 'Admin')
 
 ###############################
 #         Membership          #
@@ -447,15 +452,15 @@ client.create_table(
 )
 
 memberships = []
-memberships << Membership.create(group_id: groups.first.id,
+memberships << Membership.create!(group_id: groups.first.id,
                                  user_id: user.id)
 
-memberships << Membership.create(group_id: groups[1].id,
+memberships << Membership.create!(group_id: groups[1].id,
                                  user_id: users[1].id)
 
-memberships << Membership.create(group_id: groups[2].id,
+memberships << Membership.create!(group_id: groups[2].id,
                                  user_id: user.id)
-memberships << Membership.create(group_id: groups[2].id,
+memberships << Membership.create!(group_id: groups[2].id,
                                  user_id: users[2].id)
 
 ###############################
@@ -492,9 +497,9 @@ client.create_table(
 
 moderator_groups = []
 forums.each do |forum|
-  moderator_groups << ModeratorGroup.create(group: groups.first.id,
+  moderator_groups << ModeratorGroup.create!(group: groups.first.id,
                                             forum: forum.id)
-  moderator_groups << ModeratorGroup.create(group: groups.last.id,
+  moderator_groups << ModeratorGroup.create!(group: groups.last.id,
                                             forum: forum.id)
 end
 
@@ -532,7 +537,7 @@ client.create_table(
 
 subscriptions = []
 users.each do |u|
-  subscriptions << Subscription.create(topic: topics.first.id,
+  subscriptions << Subscription.create!(topic: topics.first.id,
                                        user_id: u.id)
 end
 
@@ -569,7 +574,7 @@ client.create_table(
 )
 
 (0..3).each do |i|
-  FavoriteForums.create(user_id: user.id, forum: forums[i].id, category: forums[i].category)
+  FavoriteForums.create!(user_id: user.id, forum: forums[i].id, category: forums[i].category)
 end
 
 ###############################
@@ -605,6 +610,6 @@ client.create_table(
 )
 
 (0..[topics.size - 1, 16].min).each do |i|
-  FavoriteTopics.create(user_id: user.id, topic: topics[i].id, forum: topics[i].forum)
+  FavoriteTopics.create!(user_id: user.id, topic: topics[i].id, forum: topics[i].forum)
 end
 

@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
 
   acts_as_messageable
 
+  has_one :profile
+  accepts_nested_attributes_for :profile
+
   class << self
     def moderate_first_post
       # Default it to true
@@ -71,6 +74,18 @@ class User < ActiveRecord::Base
     email
     #if false
     #return nil
+  end
+
+  def confirm(args={})
+    super(args)
+    build_relations
+  end
+
+  private
+
+  def build_relations
+    build_profile
+    save!
   end
 
 end

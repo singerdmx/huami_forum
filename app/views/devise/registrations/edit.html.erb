@@ -25,7 +25,7 @@
 
 <h3>Edit my profile</h3>
 
-<p>Need to update? <%= link_to "Update my profile", '/profiles', method: :get %></p>
+<p>Need to update? <%= link_to "Update my profile", "/profiles/#{current_user.profile.id}", method: :get %></p>
 
 <h3>Cancel my account</h3>
 
