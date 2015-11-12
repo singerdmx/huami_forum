@@ -30,15 +30,17 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_forem_user
-    unless current_user
-      session["user_return_to"] = request.fullpath
-      respond_to do |format|
-        format.html do
-          redirect_to controller: 'devise/sessions', action: 'new', alert: t("forems.errors.not_signed_in")
-        end
-        format.json do
-          render json: {message: 'You are not signed in'}.to_json, status: :unauthorized
-        end
+    if current_user
+      return
+    end
+
+    session["user_return_to"] = request.fullpath
+    respond_to do |format|
+      format.html do
+        redirect_to controller: 'devise/sessions', action: 'new', alert: t("forems.errors.not_signed_in")
+      end
+      format.json do
+        render json: {message: 'You are not signed in'}.to_json, status: :unauthorized
       end
     end
   end
