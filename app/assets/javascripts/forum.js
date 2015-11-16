@@ -411,7 +411,6 @@
                     p.edit = true;
                 }
                 p.reply_to_post = postsMap[p.reply_to_post];
-                $log.info('p', p);
                 return [p.updated_at, p.user, p];
             });
 

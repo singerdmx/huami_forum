@@ -46,7 +46,7 @@ window.htmlTemplates.userInfo = '''
 
 window.htmlTemplates.postBody = '''
   <% if (data.reply_to_post) { %>
-  <div><%= data.reply_to_post.body_text %></div>
+  <div><%= data.reply_to_post.user.name %><%= data.reply_to_post.body_text %></div>
   <hr/>
   <% } %>
   <div class="messageInfo"><%= data.body_text %></div>
