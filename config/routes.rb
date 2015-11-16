@@ -63,6 +63,7 @@ Rails.application.routes.draw do
   resources :profiles, only: [:show, :update]
 
   resources :users, only: [:index, :show]
+  resources :mails
   resources :messages
   resources :conversations
 end
