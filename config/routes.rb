@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   resources :favorites, only: [:index, :create, :destroy]
   resources :profiles, only: [:show, :update]
 
+  resources :users, only: [:index, :show]
   resources :messages
   resources :conversations
 end
