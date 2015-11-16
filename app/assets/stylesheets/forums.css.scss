@@ -224,6 +224,28 @@ div.messageMeta {
   }
 }
 
+div.quote-author {
+  background-color: #ecebea;
+  color: rgb(20, 20, 20);
+  font-family: Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 7px 0 0 10px;
+  border-bottom-color: #bab6b3;
+}
+
+div.quote {
+  background-color: #ecebea;
+
+
+  padding-bottom: 1px;
+  font-size: 13px;
+  line-height: 1.4;
+  padding: 7px 0 10px 10px;
+  font-weight: normal;
+  color: rgb(16, 24, 31);
+}
+
 /* Modal */
 
 div.modal-body div#cke_ckeditor span.cke_path > a {

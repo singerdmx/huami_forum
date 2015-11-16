@@ -513,8 +513,8 @@
                 $log.debug('found', found);
                 $scope.selectedForum.favorite = found != undefined;
                 $log.info('selectedForum', $scope.selectedForum);
+                ForumService.getTopicsWithFavorites(id).then(renderTopicsTable, onError);
             }, onError);
-            ForumService.getTopicsWithFavorites(id).then(renderTopicsTable, onError);
         };
         $scope.selectTopic = function (forum, id, $event) {
             $log.info('selectTopic: forum ' + forum + ', id ' + id);
@@ -531,8 +531,8 @@
                 $log.debug('found', found);
                 $scope.selectedTopic.favorite = found != undefined;
                 $log.info('selectedTopic', $scope.selectedTopic);
+                ForumService.getPosts(id).then(renderPostsTable, onError);
             }, onError);
-            ForumService.getPosts(id).then(renderPostsTable, onError);
         };
         $scope.deleteTopic = function (forum, id) {
             if (!confirm("Are you sure?")) {

@@ -24,3 +24,9 @@
 //= require forum
 //= require forum-admin
 //= require ckeditor/ckeditor
+
+
+var toggleFullQuote = function (element) {
+    $(element).hide();
+    $(element).parent().children('div.quote').last().show();
+};

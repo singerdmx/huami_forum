@@ -46,8 +46,13 @@ window.htmlTemplates.userInfo = '''
 
 window.htmlTemplates.postBody = '''
   <% if (data.reply_to_post) { %>
-  <div><%= data.reply_to_post.user.name %><%= data.reply_to_post.body_text %></div>
-  <hr/>
+  <div class="quote-author"><%= data.reply_to_post.user.name %> said:</div>
+  <div onclick="toggleFullQuote(this)" class="quote"
+    <% if (data.reply_to_post.body_text.length > 1000) { %>
+       uib-tooltip="Click to show full quote"
+    <% } %>
+       style="max-height: 150px;overflow: hidden;"><%= data.reply_to_post.body_text %></div>
+  <div class="quote" style="display:none"><%= data.reply_to_post.body_text %></div>
   <% } %>
   <div class="messageInfo"><%= data.body_text %></div>
   <div class="messageMeta">
