@@ -25,6 +25,7 @@ module UsersHelper
         email: user.email,
         name: user.name,
         picture: avatar_url(user.email, size: 60),
+        profile: user.profile.id,
     }
   end
 
