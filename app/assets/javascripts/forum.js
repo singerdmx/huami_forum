@@ -1,5 +1,5 @@
 (function () {
-    var forum = angular.module('forum', ['ngAnimate', 'ui.bootstrap', 'flow']);
+    var forum = angular.module('forum', ['ngAnimate', 'ui.bootstrap', 'flow', 'ngClipboard']);
 
     var forumService = function ($http, $log, $q) {
 

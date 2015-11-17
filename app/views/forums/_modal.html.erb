@@ -24,7 +24,7 @@
           <a uib-tooltip="Resume" ng-click="file.resume()" ng-show="file.paused" class="progress-resume-link"><i class="glyphicon glyphicon glyphicon-play"></i></a>
           <a uib-tooltip="Pause" ng-click="file.pause()" ng-show="file.isUploading()" ng-hide="file.paused" class="progress-pause-link"><i class="glyphicon glyphicon glyphicon-pause"></i></a>
           <a uib-tooltip="Cancel" ng-click="file.cancel()" ng-show="file.isUploading()" class="progress-cancel-link"><i class="glyphicon glyphicon glyphicon-stop"></i></a>
-          <a uib-tooltip="Copy file URL" ng-show="file.isComplete()" class="progress-copy-link"><i class="glyphicon glyphicon glyphicon-paperclip"></i></a>
+          <a uib-tooltip="Copy file URL" clip-copy="file.msg" ng-show="file.isComplete()" class="progress-copy-link"><i class="glyphicon glyphicon glyphicon-paperclip"></i></a>
           <a ng-click="transfers.splice($index, 1)" ng-show="file.isComplete()" class="progress-remove-link"><i class="glyphicon glyphicon glyphicon-remove-sign"></i></a>
         </td>
       </tr>
