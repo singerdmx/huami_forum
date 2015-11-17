@@ -447,7 +447,6 @@
         $scope.init = function () {
             $scope.userId = parseInt($('span#userId').text());
             $log.info('userId', $scope.userId);
-            ForumService.getCategoriesWithFavorites().then(renderCategoriesTable, onError);
         };
         $scope.toggleFavoriteForum = function (name, id, category, $event) {
             $log.info('toggleFavoriteForum: name ' + name + ', id ' + id + ', category ' + category);
