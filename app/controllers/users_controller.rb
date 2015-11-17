@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include UsersHelper
 
-  before_filter :authenticate_forem_user
+  before_filter :authenticate_forem_user, except: [:show]
 
   def index
     ActiveRecord::Base.transaction do
@@ -19,6 +19,11 @@ class UsersController < ApplicationController
   rescue Exception => e
     Rails.logger.error "Encountered an error: #{e.inspect}\nbacktrace: #{e.backtrace}"
     render json: {message: e.to_s}.to_json, status: :internal_server_error
+  end
+
+  def show
+    @profile = Profile.find(User.find(params[:id]).profile.id)
+    render 'profiles/show'
   end
 
 end
