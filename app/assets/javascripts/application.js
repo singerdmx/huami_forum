@@ -24,7 +24,7 @@
 //= require forum
 //= require forum-admin
 //= require ckeditor/ckeditor
-
+//= require ng-flow-standalone
 
 var toggleFullQuote = function (element) {
     $(element).hide();

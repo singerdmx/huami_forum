@@ -11,6 +11,26 @@
       {{modalText}}
     </textarea>
   </div>
+  <div class="file-upload-area" flow-init="{target: '/files', testChunks: false}"
+       flow-files-submitted="$flow.upload()"
+       flow-file-success="$file.msg = $message">
+
+    <input type="file" flow-btn id="btn_file_uploader" style="visibility: hidden"/>
+
+    <table class="table table-hover table-bordered table-striped table-border-hidden" flow-transfers>
+      <tr ng-repeat="file in transfers">
+        <td class="progress-text" nowrap="nowrap">{{file.name}}</td>
+        <td class="progress-pause" nowrap="nowrap" style="width: 50px">
+          <a uib-tooltip="Resume" ng-click="file.resume()" ng-show="file.paused" class="progress-resume-link"><i class="glyphicon glyphicon glyphicon-play"></i></a>
+          <a uib-tooltip="Pause" ng-click="file.pause()" ng-show="file.isUploading()" ng-hide="file.paused" class="progress-pause-link"><i class="glyphicon glyphicon glyphicon-pause"></i></a>
+          <a uib-tooltip="Cancel" ng-click="file.cancel()" ng-show="file.isUploading()" class="progress-cancel-link"><i class="glyphicon glyphicon glyphicon-stop"></i></a>
+          <a uib-tooltip="Copy file URL" ng-show="file.isComplete()" class="progress-copy-link"><i class="glyphicon glyphicon glyphicon-paperclip"></i></a>
+          <a ng-click="transfers.splice($index, 1)" ng-show="file.isComplete()" class="progress-remove-link"><i class="glyphicon glyphicon glyphicon-remove-sign"></i></a>
+        </td>
+      </tr>
+    </table>
+
+  </div>
   <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="submitForm(modalSubject)">Submit</button>
     <button class="btn btn-warning" type="button" ng-click="cancelForm()">Cancel</button>

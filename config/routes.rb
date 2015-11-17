@@ -66,4 +66,5 @@ Rails.application.routes.draw do
   resources :mails
   resources :messages
   resources :conversations
+  resources :files, only: [:create]
 end

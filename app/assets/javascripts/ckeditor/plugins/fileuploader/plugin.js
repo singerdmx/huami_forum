@@ -4,7 +4,7 @@
         init: function (editor) {
             var command = new CKEDITOR.command(editor, {
                 exec: function (editor) {
-                    alert(editor.document.getBody().getHtml());
+                    jQuery('input#btn_file_uploader').trigger('click');
                 }
             });
             editor.addCommand('fileuploader', command);
