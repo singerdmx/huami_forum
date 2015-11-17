@@ -7,7 +7,7 @@ CKEDITOR.editorConfig = function (config) {
     // Define changes to default configuration here. For example:
     config.language = 'en';
     config.uiColor = '#f5f5f5';
-    config.extraPlugins = 'youtube';
+    config.extraPlugins = 'youtube,fileuploader';
     config.toolbar = [
         {name: 'document', items: ['Source', '-', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
         {name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
@@ -28,7 +28,7 @@ CKEDITOR.editorConfig = function (config) {
         {name: 'links', items: ['Link', 'Unlink', 'Anchor']},
         {
             name: 'insert',
-            items: ['Image', 'Youtube', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak']
+            items: ['FileUploader', 'Image', 'Youtube', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak']
         },
         '/',
         {name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize']},
