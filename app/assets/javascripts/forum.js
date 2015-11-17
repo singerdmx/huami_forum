@@ -238,7 +238,7 @@
         ['$scope', '$log', '$modalInstance', 'ForumService',
             'forum', 'title', 'topicId', 'postId', 'subject', 'text', 'replyToPostId', modalInstanceController]);
 
-    var forumController = function ($scope, $log, $compile, $uibModal, $filter, ForumService) {
+    var forumController = function ($scope, $log, $location, $compile, $uibModal, $filter, ForumService) {
         $scope.oneAtATime = true;
 
         $scope.forumStatus = {
@@ -501,6 +501,10 @@
         };
         $scope.selectForum = function (name, id, category, $event) {
             $log.info('selectForum: name ' + name + ', forum ' + id + ', category ' + category);
+            $location.search('category', category);
+            $location.search('forum', id);
+            $location.search('topic', null);
+            $location.search('post', null);
             var oTable = $('table#categoriesTable').dataTable();
             oTable.$('span.selected-forum').removeClass('selected-forum');
             $('div#categories-table-banner span.selected-forum').removeClass('selected-forum');
@@ -518,6 +522,8 @@
         };
         $scope.selectTopic = function (forum, id, $event) {
             $log.info('selectTopic: forum ' + forum + ', id ' + id);
+            $location.search('topic', id);
+            $location.search('post', null);
             var oTable = $('table#topicsTable').dataTable();
             oTable.$('span.selected-topic').removeClass('selected-topic');
             $('div#topics-table-banner span.selected-topic').removeClass('selected-topic');
@@ -656,5 +662,5 @@
         };
     };
 
-    forum.controller('ForumController', ['$scope', '$log', '$compile', '$uibModal', '$filter', 'ForumService', forumController]);
+    forum.controller('ForumController', ['$scope', '$log', '$location', '$compile', '$uibModal', '$filter', 'ForumService', forumController]);
 }());
