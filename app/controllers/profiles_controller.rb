@@ -1,9 +1,10 @@
 class ProfilesController < ApplicationController
 
-  before_filter :authenticate_forem_user
+  before_filter :authenticate_forem_user, except: [:show]
   before_filter :find_profile
 
   def show
+    @is_self = current_user.id == @profile.user_id
   end
 
   private

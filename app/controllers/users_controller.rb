@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 
   def show
     @profile = Profile.find(User.find(params[:id]).profile.id)
+    @is_self = params[:id].to_i == current_user.id
     render 'profiles/show'
   end
 

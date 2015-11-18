@@ -1,1 +1,13 @@
-Profile
+<h2 class="form-signin-heading"><%= current_user.name %></h2>
+<hr/>
+<div ng-app="forum">
+  <div ng-controller="ForumController">
+    <uib-tabset>
+      <uib-tab heading="Personal Information">Static content</uib-tab>
+      <uib-tab heading="Recent Activities">Static content</uib-tab>
+      <% if @is_self %>
+          <uib-tab heading="Settings">Static content</uib-tab>
+      <% end %>
+    </uib-tabset>
+  </div>
+</div>
