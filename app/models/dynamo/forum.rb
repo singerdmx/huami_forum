@@ -6,7 +6,7 @@ class Forum < OceanDynamo::Table
     attribute :category_name
     attribute :forum_name
     attribute :description
-    attribute :views_count, :integer, default: 1
+    attribute :views_count, :integer, default: 0
     attribute :posts_count, :integer, default: 0
     attribute :topics_count, :integer, default: 0
     attribute :last_post_id

@@ -11,9 +11,9 @@ class FavoritesController < ApplicationController
 
     case params[:type]
       when 'forum'
-        all_favorites = query(FavoriteForums, 'user_id = :u', ':u' => current_user.id)
+        all_favorites = query(FavoriteForum, 'user_id = :u', ':u' => current_user.id)
       when 'topic'
-        all_favorites = query(FavoriteTopics, 'user_id = :u', ':u' => current_user.id)
+        all_favorites = query(FavoriteTopic, 'user_id = :u', ':u' => current_user.id)
       else
         fail "Invalid parameter 'type': #{params[:type]}"
     end
@@ -38,9 +38,9 @@ class FavoritesController < ApplicationController
     end
     case params[:type]
       when 'forum'
-        FavoriteForums.create(user_id: current_user.id, category: params[:category], forum: params[:forum])
+        FavoriteForum.create!(user_id: current_user.id, category: params[:category], forum: params[:forum])
       when 'topic'
-        FavoriteTopics.create(user_id: current_user.id, forum: params[:forum], topic: params[:topic])
+        FavoriteTopic.create!(user_id: current_user.id, forum: params[:forum], topic: params[:topic])
       else
         fail "Invalid parameter 'type': #{params[:type]}"
     end
@@ -57,9 +57,9 @@ class FavoritesController < ApplicationController
     end
     case params[:type]
       when 'forum'
-        delete(FavoriteForums, {user_id: current_user.id, forum: params[:id]})
+        delete(FavoriteForum, {user_id: current_user.id, forum: params[:id]})
       when 'topic'
-        delete(FavoriteTopics, {user_id: current_user.id, topic: params[:id]})
+        delete(FavoriteTopic, {user_id: current_user.id, topic: params[:id]})
       else
         fail "Invalid parameter 'type': #{params[:type]}"
     end

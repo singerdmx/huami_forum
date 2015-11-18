@@ -180,6 +180,38 @@ if ENV['massive_seeding']
 end
 
 ###############################
+#        User  Topics         #
+###############################
+
+client.create_table(
+    attribute_definitions: [
+        {
+            attribute_name: 'updated_at',
+            attribute_type: 'N',
+        },
+        {
+            attribute_name: 'user_id',
+            attribute_type: 'N',
+        },
+    ],
+    table_name: UserTopic.get_table_name,
+    key_schema: [
+        {
+            attribute_name: 'user_id',
+            key_type: 'HASH',
+        },
+        {
+            attribute_name: 'updated_at',
+            key_type: 'RANGE',
+        },
+    ],
+    provisioned_throughput: {
+        read_capacity_units: read_capacity_units,
+        write_capacity_units: write_capacity_units,
+    },
+)
+
+###############################
 #           Topic             #
 ###############################
 
@@ -242,6 +274,8 @@ topics << Topic.create!(
     subject: 'How to upgrade',
     user_id: user.id,
     state: 'approved')
+
+sleep 0.1
 
 topics << Topic.create!(
     forum: forums.first.id,
@@ -556,7 +590,7 @@ client.create_table(
             attribute_type: 'N',
         },
     ],
-    table_name: FavoriteForums.get_table_name,
+    table_name: FavoriteForum.get_table_name,
     key_schema: [
         {
             attribute_name: 'user_id',
@@ -574,7 +608,7 @@ client.create_table(
 )
 
 (0..3).each do |i|
-  FavoriteForums.create!(user_id: user.id, forum: forums[i].id, category: forums[i].category)
+  FavoriteForum.create!(user_id: user.id, forum: forums[i].id, category: forums[i].category)
 end
 
 ###############################
@@ -592,7 +626,7 @@ client.create_table(
             attribute_type: 'N',
         },
     ],
-    table_name: FavoriteTopics.get_table_name,
+    table_name: FavoriteTopic.get_table_name,
     key_schema: [
         {
             attribute_name: 'user_id',
@@ -610,6 +644,6 @@ client.create_table(
 )
 
 (0..[topics.size - 1, 16].min).each do |i|
-  FavoriteTopics.create!(user_id: user.id, topic: topics[i].id, forum: topics[i].forum)
+  FavoriteTopic.create!(user_id: user.id, topic: topics[i].id, forum: topics[i].forum)
 end
 

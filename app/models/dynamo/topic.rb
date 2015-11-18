@@ -13,7 +13,7 @@ class Topic < OceanDynamo::Table
     attribute :last_post_at, :integer
     attribute :last_post_by, :integer
     attribute :posts_count, :integer, default: 0
-    attribute :views_count, :integer, default: 1
+    attribute :views_count, :integer, default: 0
   end
 
   include Workflow
@@ -33,6 +33,7 @@ class Topic < OceanDynamo::Table
   end
 
   after_create :increment_topics_count
+  after_create :add_to_user_topics
   # after_create :subscribe_poster
   # after_create :skip_pending_review, :unless => :moderated?
 
@@ -160,6 +161,10 @@ class Topic < OceanDynamo::Table
     update(Forum, {category: category, id: forum},
            update_expression,
            expression_attribute_values)
+  end
+
+  def add_to_user_topics
+    UserTopic.create!(user_id: user_id, forum: forum, topic: id)
   end
 
 end

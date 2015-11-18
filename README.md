@@ -38,9 +38,9 @@ moderator_group: forum(hash, forum_id), group(range, group_id)
 
 subscription: topic(hash, topic_id), user_id(range)
 
-favorite_forums: user_id(hash), id(range, string), category(string), forum (string)
+favorite_forums: user_id(hash), forum(range, string), category(string)
 
-favorite_topics: user_id(hash), id(range, string), forum (string), topic (string)
+favorite_topics: user_id(hash), topic(range, string), forum (string)
 
 user_topics (topics created by user): user_id(hash), updated_at(range, int), forum (string), topic (string)
 
