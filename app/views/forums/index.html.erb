@@ -2,11 +2,15 @@
 <div ng-app="forum">
   <div ng-controller="ForumController" ng-init="init()">
     <%= render 'forums/modal' %>
-    <uib-accordion close-others="oneAtATime">
-      <%= render 'forums/forums' %>
-      <%= render 'forums/topics' %>
-      <%= render 'forums/posts' %>
-    </uib-accordion>
+    <div style="width: 80%; float: left">
+      <uib-accordion close-others="oneAtATime">
+        <%= render 'forums/forums' %>
+        <%= render 'forums/topics' %>
+        <%= render 'forums/posts' %>
+      </uib-accordion>
+    </div>
+    <div style="width: 20%; float: left; height: 500px">
+    </div>
   </div>
 </div>
 
